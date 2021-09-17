@@ -33,7 +33,7 @@
 
 #include <iostream> // FILE
 #include <limits> // std::numeric_limits
-
+#include <assert.h>
 namespace cltune {
 // =================================================================================================
 
@@ -178,6 +178,12 @@ template void PUBLIC_API Tuner::AddArgumentInput<float>(const std::vector<float>
 template void PUBLIC_API Tuner::AddArgumentInput<double>(const std::vector<double>&);
 template void PUBLIC_API Tuner::AddArgumentInput<float2>(const std::vector<float2>&);
 template void PUBLIC_API Tuner::AddArgumentInput<double2>(const std::vector<double2>&);
+
+void Tuner::AddArgumentObject(size_t arg_index, size_t arg_size, const void* arg_value){
+  assert(pimpl->argument_counter_ == arg_index);
+  auto argument = TunerImpl::ObjectArgument{pimpl->argument_counter_++, arg_size,arg_value};
+  pimpl->arguments_object_.push_back(argument);
+}
 
 // Similar to the above function, but now marked as output buffer. Output buffers are special in the
 // sense that they will be checked in the verification process.

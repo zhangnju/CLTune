@@ -96,6 +96,12 @@ class TunerImpl {
     BufferRaw buffer;   // The buffer on the device
   };
 
+  struct ObjectArgument{
+	  size_t obj_index;
+    size_t obj_size;
+    const void* obj_value;
+  };
+
   // Helper structure to hold the results of a tuning run
   struct TunerResult {
     std::string kernel_name;
@@ -191,6 +197,8 @@ class TunerImpl {
   std::vector<std::pair<size_t,double>> arguments_double_;
   std::vector<std::pair<size_t,float2>> arguments_float2_;
   std::vector<std::pair<size_t,double2>> arguments_double2_;
+
+  std::vector<ObjectArgument> arguments_object_;
 
   // Storage for the reference kernel and output
   std::unique_ptr<KernelInfo> reference_kernel_;

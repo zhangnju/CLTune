@@ -124,6 +124,10 @@ class Tuner {
   template <typename T> void AddArgumentOutput(const std::vector<T> &source);
   template <typename T> void AddArgumentScalar(const T argument);
 
+  // Functions to add kernel-arguments for input/output object, and sampler for cl_image. Make sure to
+  // call these in the order in which the arguments appear in the kernel.
+  void PUBLIC_API AddArgumentObject(size_t arg_index, size_t arg_size, const void* arg_value);
+
   // Configures a specific search method. The default search method is "FullSearch". These are
   // implemented as separate functions since they each take a different number of arguments.
   void PUBLIC_API UseFullSearch();
